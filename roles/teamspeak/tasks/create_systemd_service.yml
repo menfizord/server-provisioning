@@ -1,0 +1,10 @@
+- name: Copy readme
+  copy:
+    src: README.txt
+    dest: /home/teamspeaknn/
+
+- name: Copy systemd service file for user
+  copy:
+    src: teamspeak.service
+    dest: /home/teamspeaknn/.config/systemd/user/
+

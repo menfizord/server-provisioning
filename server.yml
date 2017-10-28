@@ -1,0 +1,56 @@
+- name: Server setup
+  hosts: server
+  connection: ssh
+  pre_tasks:
+    - hostname:
+        name: WebServer
+    - apt:
+        name: '{{ item }}'
+      with_items:
+        - nginx
+        - python3
+        - aptitude
+        - golang-go
+        - bzip2
+  roles:
+    - system-setup
+    - {
+      role: create-user,
+      user_name: webadmin,
+      user_password: '',
+      user_id: 1100
+    }
+    - {
+      role: create-user,
+      user_name: teamspeak,
+      user_password: '',
+      user_id: 1101
+    }
+    - {
+      role: add-ssh-keys,
+      keys: [
+        ],
+      user_name: webadmin
+    }
+    - {
+      role: add-ssh-keys,
+      keys: [
+        ],
+      user_name: teamspeak
+    }
+    - disable-ssh-log-in-with-password
+
+- name: Install teampseak server
+  hosts: server
+  roles:
+    - {
+       role: teamspeak,
+       ansible_user: teamspeak
+    }
+
+- name: Reboot server
+  hosts: server
+  tasks:
+    - shell: reboot now
+
+# TODO NGINX, WEB APP CONFIGURATION AND DEPENDECIES

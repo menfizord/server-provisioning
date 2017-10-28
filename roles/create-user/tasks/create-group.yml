@@ -1,0 +1,6 @@
+- name: Create group for user
+  group:
+    name: "{{ user_name }}"
+    gid: "{{ user_id }}"
+
+

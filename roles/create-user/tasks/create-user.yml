@@ -1,0 +1,10 @@
+- name: Create user and add to system, systemd-journal group
+  user:
+    name: '{{ user_name }}'
+    password: '{{ user_password }}'
+    uid: "{{ user_id }}"
+    system: yes
+    group: '{{ user_name }}'
+    groups: systemd-journal
+    append: yes
+    shell: /bin/bash

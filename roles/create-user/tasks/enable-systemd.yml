@@ -1,0 +1,9 @@
+- name: Create systemd directory for user
+  file:
+    owner: '{{ user_name }}'
+    group: '{{ user_name }}'
+    recurse: yes
+    path: '/home/{{ user_name }}/.config/systemd/user/'
+
+- name: Enable systemd for user
+  shell: loginctl enable-linger {{ user_name }}

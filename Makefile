@@ -10,7 +10,14 @@ install-reqs = \
 	@echo "|||||Installing python requirements|||||"; \
 	source ./venv/bin/activate &&  pip install -r ./requirements.txt
 
+provision-server = \
+	@echo "Starting provisioning"; \
+	source ./venv/bin/activate && ansible-playbook -i inventory/server.inventory ./server.yml
+
 install:
 	$(call install-virtualenv)
 	$(call create-virtualenv)
 	$(call install-reqs)
+
+provision:
+	$(call provision-server)

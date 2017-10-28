@@ -1,0 +1,13 @@
+- name: Install systemd dependecies
+  apt:
+    name: '{{ item }}'
+  with_items:
+    - dbus
+    - libpam-systemd
+
+- name: Restart logind
+  systemd: 
+    name: systemd-logind
+    enabled: yes
+    daemon_reload: yes
+    state: restarted

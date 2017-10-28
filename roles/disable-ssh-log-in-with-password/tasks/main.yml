@@ -1,0 +1,10 @@
+- name: Disable ssh login with password
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PasswordAuthentication yes'
+    line: 'PasswordAuthentication no'
+
+- name: Restart sshd
+  systemd:
+    name: sshd
+    state: restarted
