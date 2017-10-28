@@ -12,6 +12,7 @@
         - aptitude
         - golang-go
         - bzip2
+        - htop
   roles:
     - system-setup
     - {
